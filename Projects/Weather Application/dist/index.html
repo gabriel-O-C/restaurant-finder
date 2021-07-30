@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Application</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main>
+        <h1>Responsive Weather App powered By the open Weather A P I</h1>
+        <section id="searchBar" class="searchBar">
+            <form action="" id="searchBar-form" class="searchBar-form" role="search">
+                <label for="searchBar-text">Enter a new location</label>
+                <input type="text" id="searchBar-text" class="searchBar-text" role="searchbox" size="40" autocomplete="off" placeholder="city, State, Country">
+                
+                <button id="searchBar-button" class="searchBar-button" title="Submit Location" aria-label="Enter Zip Code or City, State and Country to retrieve weather conditions">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                    <i class="fas fa-sync fa-spin"></i>
+
+                </button>
+            </form>
+        </section>
+        <a href="#currentForecast" class="skip-link">Skip current conditions</a>
+
+        <section id="currentForecast" class="currentForecast" role="region" aria-labelledby="weatherLocation">
+            <h2 id="currentForecast-location" class="currentForecast-location">Current Conditions</h2>
+            div
+        </section>
+        <nav id="navButtons" class="navButtons"></nav>
+        <section id="dailyForecast" class="dailyForecast"></section>
+    </main>
+    
+</body>
+</html>
