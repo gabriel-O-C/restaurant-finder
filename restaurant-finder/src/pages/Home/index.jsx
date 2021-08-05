@@ -1,11 +1,14 @@
 import React, {useState} from 'react'
 import logo from '../../assets/logo.svg'
-import { Container, Search, Input, FormContainer, Logo, Map, Wrapper, CarouselTitle, Carousel } from '../../styles'
+import { Container, Search, Input, FormContainer, Logo,  Wrapper, CarouselTitle, Carousel } from '../../styles'
 import Restaurant from '../../assets/restaurante-fake.png';
-import { Card } from '../../components'
-import { RestaurantCard } from '../../components';
+import { Card, RestaurantCard, Modal, Map  } from '../../components'
 const Home = () => {
     const [inputValue, setInputValue] = useState('');
+    const [query, setQuery] = useState(null);
+    const [modalOpened, setModalOpened] = useState(false);
+
+
     const settings = {
     dots: false,
     infinite: true,
@@ -14,7 +17,11 @@ const Home = () => {
     slidesToScroll: 4,
     adaptiveHeight: true
     };
-
+    function handleKeyPress(e) {
+        if(e.key === 'Enter') {
+            setQuery(inputValue);
+        }
+    }
     return (
         
         <Wrapper>
@@ -41,15 +48,12 @@ const Home = () => {
                     <Card photo={Restaurant} title="..."/>
                     <Card photo={Restaurant} title="..."/>
                     <Card photo={Restaurant} title="..."/>
-
-                        
-                      
-
-                    </Carousel>        
-                </Search>
+                    </Carousel>      
+                </Search>              
                 <RestaurantCard/>
             </Container>
-            <Map/>
+            <Map query={query}/>
+            <Modal open={modalOpened} onClose={() => setModalOpened(!modalOpened)} />
         </Wrapper>
            
         
