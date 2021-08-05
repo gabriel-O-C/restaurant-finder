@@ -2,9 +2,8 @@ import React, {useState} from 'react'
 import logo from '../../assets/logo.svg'
 import { Container, Search, Input, FormContainer, Logo, Map, Wrapper, CarouselTitle, Carousel } from '../../styles'
 import Restaurant from '../../assets/restaurante-fake.png';
-import Slider from "react-slick";
 import { Card } from '../../components'
-
+import { RestaurantCard } from '../../components';
 const Home = () => {
     const [inputValue, setInputValue] = useState('');
     const settings = {
@@ -48,6 +47,7 @@ const Home = () => {
 
                     </Carousel>        
                 </Search>
+                <RestaurantCard/>
             </Container>
             <Map/>
         </Wrapper>
