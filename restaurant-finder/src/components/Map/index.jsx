@@ -1,9 +1,14 @@
 import { GoogleApiWrapper, Map, Marker } from 'google-maps-react';
+import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 
+
+import { setRestaurants, setRestaurant } from '../../redux/modules/restaurants';
 export const MapContainer = (props) => {
+    const dispatch = useDispatch();
+    const { restaurants } = useSelector((state) => state.restaurants);
     const [map, setMap] = useState(null);
-    const {google, query} = props;
+    const {google, query, placeId} = props;
 
     useEffect(() => {
         if(query) {
@@ -24,7 +29,7 @@ export const MapContainer = (props) => {
 
         service.textSearch(request, (results, status) => {
             if(status === google.maps.places.PlacesServiceStatus.OK) {
-                console.log('restaurants>>>>>', results);
+                dispatch(setRestaurants(results));
             }
         });
     }
@@ -40,7 +45,7 @@ export const MapContainer = (props) => {
 
         service.nearbySearch(request, (results, status) => {
             if(status === google.maps.places.PlacesServiceStatus.OK){
-                console.log('restaurants>>>>', results);
+                dispatch(setRestaurants(results));
             }
         });
     }
@@ -50,7 +55,25 @@ export const MapContainer = (props) => {
         searchNearby(map, map.center);
     }
 
-    return(<Map google={google} centerAroundCurrentLocation onReady={onMapReady} onRecenter={onMapReady}/>)
+    return(
+        <Map google={google}
+         centerAroundCurrentLocation
+         onReady={onMapReady}
+         onRecenter={onMapReady}
+         zoom={15}
+         {...props}> 
+            {restaurants.map((restaurant ) => (
+                <Marker
+                 key={restaurant.place_id}
+                 name={restaurant.name}
+                 position={{
+                    lat: restaurant.geometry.location.lat(),
+                    lng: restaurant.geometry.location.lng()
+                }} />
+            ))}
+            <Marker/>    
+        </Map>
+    )
 };
 
 export default GoogleApiWrapper({
