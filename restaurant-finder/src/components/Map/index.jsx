@@ -14,7 +14,27 @@ export const MapContainer = (props) => {
         if(query) {
             searchByQuery(query);
         }
-    }, [query])
+    }, [query]);
+
+    useEffect(() => {
+        if(placeId) {
+            getRestaurantById(placeId);
+        }
+    }, [placeId]);
+
+    function getRestaurantById(){
+        const service = new google.maps.places.PlacesService(map);
+
+        const request = {
+            placeId,
+            fields: ['name', 'opening_hours', 'formatted_address', 'formatted_phone_number'],
+        }
+        service.getDetails(request, (place, status) => {
+            if(status === google.maps.places.PlacesServiceStatus.OK) {
+                dispatch(setRestaurants(place));
+            }
+        })
+    }
 
     function searchByQuery(){
         const service  = new google.maps.places.PlacesService(map);
